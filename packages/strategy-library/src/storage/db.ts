@@ -47,6 +47,7 @@ function migrate(db: Database.Database): void {
       version INTEGER NOT NULL,
       technique_name TEXT NOT NULL,
       description TEXT NOT NULL,
+      mechanism TEXT NOT NULL DEFAULT '',
       strategy_category TEXT NOT NULL DEFAULT '[]',
       is_responsive INTEGER NOT NULL DEFAULT 0,
       population TEXT NOT NULL DEFAULT '[]',
@@ -100,13 +101,13 @@ function seed(db: Database.Database): void {
 
   const upsertTemplate = db.prepare(`
     INSERT INTO strategy_templates (
-      id, version, technique_name, description, strategy_category, is_responsive,
+      id, version, technique_name, description, mechanism, strategy_category, is_responsive,
       population, evidence_tier, evidence_summary, source_ids, prerequisites,
       capacity_considerations, capacity_considerations_note, contraindications,
       safety_boundary, measurement_guidance, delivery_format, personalization_axes,
       superseded_by
     ) VALUES (
-      @id, @version, @techniqueName, @description, @strategyCategory, @isResponsive,
+      @id, @version, @techniqueName, @description, @mechanism, @strategyCategory, @isResponsive,
       @population, @evidenceTier, @evidenceSummary, @sourceIds, @prerequisites,
       @capacityConsiderations, @capacityConsiderationsNote, @contraindications,
       @safetyBoundary, @measurementGuidance, @deliveryFormat, @personalizationAxes,
@@ -116,6 +117,7 @@ function seed(db: Database.Database): void {
       version = excluded.version,
       technique_name = excluded.technique_name,
       description = excluded.description,
+      mechanism = excluded.mechanism,
       strategy_category = excluded.strategy_category,
       is_responsive = excluded.is_responsive,
       population = excluded.population,

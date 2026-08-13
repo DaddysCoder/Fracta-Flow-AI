@@ -19,7 +19,15 @@ package under `packages/`, designed to be used standalone or together.
 - [`packages/strategy-library-app`](packages/strategy-library-app/README.md) —
   the Phase 1 MVP UI: a Vite + React + TypeScript + Tailwind PWA for
   browsing/filtering strategies and authoring personalisation records,
-  offline-capable via Dexie (IndexedDB) for local storage.
+  offline-capable via Dexie (IndexedDB) for local storage. Calls
+  `strategy-library-server` for AI-assisted personalisation; never calls
+  the model directly.
+- [`packages/strategy-library-server`](packages/strategy-library-server/README.md) —
+  backend for the one AI-assisted step in the flow (personalisation of an
+  already-selected strategy). Holds the Anthropic API key server-side,
+  enforces the axis→profile-field allowlist itself rather than trusting
+  the client, and classifies every failure as a network error, an API
+  error, or a content refusal so the client can show the right message.
 
 ## Development
 

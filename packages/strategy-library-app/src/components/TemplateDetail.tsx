@@ -4,7 +4,7 @@ import type { Participant } from "@fracta-flow/participant-profile/core";
 import { CATEGORY_LABELS, EVIDENCE_TIER_LABELS } from "../lib/constants";
 import { AXIS_LABELS, hasAxisData } from "../lib/personalisationAxes";
 import { SupersededBanner } from "./SupersededBanner";
-import { PersonalisationForm } from "./PersonalisationForm";
+import { PersonalisationWizard } from "./PersonalisationWizard";
 
 // See ParticipantPicker.tsx for why this is a namespace import rather
 // than a named import.
@@ -70,6 +70,7 @@ export function TemplateDetail({
         <p className="mt-3 text-sm text-slate-700">{template.description}</p>
 
         <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Field label="Mechanism (held fixed by personalisation)" value={template.mechanism} span />
           <Field label="Evidence summary" value={template.evidenceSummary} span />
           {template.population.length > 0 && (
             <Field label="Population studied" value={template.population.join(", ")} />
@@ -141,7 +142,7 @@ export function TemplateDetail({
           Select or create a participant to personalise this strategy.
         </p>
       ) : personalising ? (
-        <PersonalisationForm
+        <PersonalisationWizard
           template={template}
           participant={activeParticipant}
           onCancel={() => setPersonalising(false)}

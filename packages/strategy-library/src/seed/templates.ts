@@ -20,6 +20,20 @@ import type { StrategyTemplate } from "../types";
  *
  * Zero seed entries exist yet for Regulating, Community, or Health and
  * Wellbeing — also a known gap, not a build defect.
+ *
+ * `mechanism` is a later addition (Personalization Architecture brief):
+ * the fixed causal/theoretical mechanism personalisation must hold
+ * constant, distinct from `description`. Backfilled here as an honest
+ * one-sentence paraphrase grounded in each entry's existing description/
+ * evidence summary — not sourced from new citations.
+ *
+ * `personalizationAxes` is populated for a representative subset
+ * (visual-scheduling, functional-communication-training, skills-teaching,
+ * coping-and-tolerance-skills-training) so the personalisation flow has
+ * real content to exercise; the rest are left `[]` pending the same
+ * content follow-up already noted above. `safetyBoundary` is populated
+ * for the two reactive entries, directly supported by their existing
+ * "non-punitive"/"reactive" framing — not invented clinical detail.
  */
 export const SEED_TEMPLATES: StrategyTemplate[] = [
   {
@@ -28,6 +42,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Positive Behaviour Support (package-level)",
     description:
       "A package-level PBS approach, reviewed at the fidelity level by Paulauskaite et al. (2019), which cites a 43% reduction in challenging behaviour from Hassiotis et al.'s 2009 pilot (n=63). That pilot's figure has since been superseded by a much larger, better-powered trial — see supersededBy.",
+    mechanism:
+      "Package-level: replaces multiple maintaining conditions for challenging behaviour with proactive supports and taught alternatives, delivered through staff training.",
     strategyCategory: [],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -51,6 +67,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Ecological Strategies",
     description:
       "Adjustments to the person's physical and routine environment, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Reduces the environmental demand or mismatch that triggers challenging behaviour by adjusting the physical space or routine itself, rather than asking the person to change.",
     strategyCategory: ["environmental"],
     isResponsive: false,
     population: [],
@@ -74,6 +92,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Visual Scheduling",
     description:
       "Use of visual schedules to increase predictability of routine, reported as a specific example within the ecological strategies component of the same PBS training service evaluation.",
+    mechanism:
+      "Reduces uncertainty about what happens next by externalising the routine as a visual sequence, lowering anxiety-driven behaviour tied to unpredictability.",
     strategyCategory: ["environmental"],
     isResponsive: false,
     population: [],
@@ -88,7 +108,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     safetyBoundary: null,
     measurementGuidance: "",
     deliveryFormat: "",
-    personalizationAxes: [],
+    personalizationAxes: ["interests"],
     supersededBy: null,
   },
   {
@@ -97,6 +117,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Functional Communication Training",
     description:
       "Teaching a person a new, more effective way to communicate a need that challenging behaviour currently serves, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Replaces the challenging behaviour's communicative function with a taught, lower-effort alternative that achieves the same outcome.",
     strategyCategory: ["communication"],
     isResponsive: false,
     population: [],
@@ -111,7 +133,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     safetyBoundary: null,
     measurementGuidance: "",
     deliveryFormat: "",
-    personalizationAxes: [],
+    personalizationAxes: ["communication_style"],
     supersededBy: null,
   },
   {
@@ -120,6 +142,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Functionally Equivalent Skills Training",
     description:
       "Teaching a skill that achieves the same outcome as the challenging behaviour, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Teaches a skill that produces the same functional outcome as the challenging behaviour, so the behaviour is no longer the most efficient way to get that outcome.",
     strategyCategory: ["learning"],
     isResponsive: false,
     population: [],
@@ -143,6 +167,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Coping and Tolerance Skills Training",
     description:
       "Teaching skills for coping with and tolerating distressing situations, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Builds the person's own capacity to tolerate distressing situations, reducing reliance on challenging behaviour as an escape or avoidance response.",
     strategyCategory: ["learning"],
     isResponsive: false,
     population: [],
@@ -157,7 +183,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     safetyBoundary: null,
     measurementGuidance: "",
     deliveryFormat: "",
-    personalizationAxes: [],
+    personalizationAxes: ["interests"],
     supersededBy: null,
   },
   {
@@ -166,6 +192,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Antecedent Control Strategies",
     description:
       "Modifying conditions that precede challenging behaviour to reduce its likelihood, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Removes or modifies the conditions that reliably precede challenging behaviour, reducing its likelihood before it starts.",
     strategyCategory: ["environmental"],
     isResponsive: false,
     population: [],
@@ -189,6 +217,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Time-Based Reinforcement",
     description:
       "Delivering reinforcement on a fixed time schedule independent of behaviour, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Delivers reinforcement on a fixed schedule independent of behaviour, reducing the motivating operation that drives behaviour aimed at obtaining that reinforcement.",
     strategyCategory: ["environmental"],
     isResponsive: false,
     population: [],
@@ -212,6 +242,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Differential Reinforcement",
     description:
       "Reinforcing a desired alternative behaviour while withholding reinforcement for the challenging one. This is a MERGED entry: two sources describe the same underlying technique with conflicting findings, so both are stated honestly rather than picking a side.",
+    mechanism:
+      "Reinforces a specific alternative behaviour while withholding reinforcement for the challenging one, shifting which behaviour gets reinforced without changing what is reinforcing.",
     strategyCategory: ["learning"],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -235,6 +267,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Nonaversive Reactive Strategies",
     description:
       "Non-punitive responses used once challenging behaviour is already occurring, reported as one package-level component within a broader PBS training service evaluation.",
+    mechanism:
+      "Responds to challenging behaviour once it is occurring in a way that de-escalates without punishment, avoiding reinforcement of the behaviour while keeping the interaction non-punitive.",
     strategyCategory: [],
     isResponsive: true,
     population: [],
@@ -246,7 +280,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     capacityConsiderations: [],
     capacityConsiderationsNote: "Not yet re-tagged — pending content task.",
     contraindications: "",
-    safetyBoundary: null,
+    safetyBoundary: "Never use physical restraint, seclusion, or aversive/punitive procedures.",
     measurementGuidance: "",
     deliveryFormat: "",
     personalizationAxes: [],
@@ -258,6 +292,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Noncontingent Reinforcement",
     description:
       "Delivering reinforcement independent of the person's behaviour, reported as one package-level component within a larger cluster RCT of PBS staff training.",
+    mechanism:
+      "Delivers reinforcement on a schedule unrelated to behaviour, reducing the motivation to engage in challenging behaviour to obtain it.",
     strategyCategory: [],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -281,6 +317,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Skills Teaching",
     description:
       "Direct teaching of replacement or coping skills, reported as one package-level component within a larger cluster RCT of PBS staff training.",
+    mechanism:
+      "Directly teaches a replacement or coping skill so the person has another way to meet the need currently met by challenging behaviour.",
     strategyCategory: ["learning"],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -295,7 +333,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     safetyBoundary: null,
     measurementGuidance: "",
     deliveryFormat: "",
-    personalizationAxes: [],
+    personalizationAxes: ["interests", "communication_style"],
     supersededBy: null,
   },
   {
@@ -304,6 +342,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Primary Prevention Strategies",
     description:
       "Upstream, whole-environment prevention strategies applied before any warning signs appear, reported as one package-level component within a larger cluster RCT of PBS staff training. Primary/Secondary Prevention is a timing framing, not a category in the v2 scheme — this entry needs re-tagging into whichever of the six actual categories fits, not carried forward as its own category.",
+    mechanism:
+      "Adjusts the whole environment upstream of any behaviour, reducing baseline risk factors before warning signs appear.",
     strategyCategory: [],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -327,6 +367,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Secondary Prevention Strategies",
     description:
       "Prevention strategies applied once early warning signs are detected, reported as one package-level component within a larger cluster RCT of PBS staff training. Primary/Secondary Prevention is a timing framing, not a category in the v2 scheme — this entry needs re-tagging into whichever of the six actual categories fits, not carried forward as its own category.",
+    mechanism:
+      "Intervenes once early warning signs are detected, aiming to prevent escalation to peak behaviour.",
     strategyCategory: [],
     isResponsive: false,
     population: ["intellectual_disability"],
@@ -350,6 +392,8 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     techniqueName: "Reactive Strategies",
     description:
       "Responses used once challenging behaviour is already occurring, reported as one package-level component within a larger cluster RCT of PBS staff training.",
+    mechanism:
+      "Responds to challenging behaviour once it is occurring, aiming to keep the person and others safe and de-escalate without reinforcing the behaviour.",
     strategyCategory: [],
     isResponsive: true,
     population: ["intellectual_disability"],
@@ -361,7 +405,7 @@ export const SEED_TEMPLATES: StrategyTemplate[] = [
     capacityConsiderations: [],
     capacityConsiderationsNote: "Not yet re-tagged — pending content task.",
     contraindications: "",
-    safetyBoundary: null,
+    safetyBoundary: "Never use physical restraint, seclusion, or aversive/punitive procedures.",
     measurementGuidance: "",
     deliveryFormat: "",
     personalizationAxes: [],

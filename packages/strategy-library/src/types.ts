@@ -69,6 +69,16 @@ export interface StrategyTemplate {
   techniqueName: string;
   /** Practitioner's own paraphrase — never copied text from the source. */
   description: string;
+  /**
+   * The fixed causal/theoretical mechanism of the technique — what
+   * actually does the work (e.g. "replaces the challenging behaviour's
+   * function with a lower-effort communicative alternative"). This is
+   * what personalisation must hold fixed: an AI-personalised version may
+   * vary surface/theme freely, but if it changes this mechanism, that's a
+   * bug, not an acceptable variation. Distinct from `description`, which
+   * is a general paraphrase of the technique for browsing.
+   */
+  mechanism: string;
   strategyCategory: StrategyCategory[];
   /**
    * If true, render separately from the six proactive categories and

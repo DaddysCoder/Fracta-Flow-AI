@@ -24,6 +24,7 @@ interface TemplateRow {
   version: number;
   technique_name: string;
   description: string;
+  mechanism: string;
   strategy_category: string;
   is_responsive: number;
   population: string;
@@ -67,6 +68,7 @@ function rowToTemplate(row: TemplateRow): StrategyTemplate {
     version: row.version,
     techniqueName: row.technique_name,
     description: row.description,
+    mechanism: row.mechanism,
     strategyCategory: parseJson<StrategyCategory[]>(row.strategy_category, []),
     isResponsive: !!row.is_responsive,
     population: parseJson<string[]>(row.population, []),
