@@ -62,7 +62,9 @@ function migrate(db: Database.Database): void {
       measurement_guidance TEXT NOT NULL DEFAULT '',
       delivery_format TEXT NOT NULL DEFAULT '',
       personalization_axes TEXT NOT NULL DEFAULT '[]',
-      superseded_by TEXT
+      superseded_by TEXT,
+      age_appropriateness TEXT,
+      cultural_safety_flag TEXT
     );
 
     CREATE TABLE IF NOT EXISTS personalisation_records (
@@ -105,13 +107,13 @@ function seed(db: Database.Database): void {
       population, evidence_tier, evidence_summary, source_ids, prerequisites,
       capacity_considerations, capacity_considerations_note, contraindications,
       safety_boundary, measurement_guidance, delivery_format, personalization_axes,
-      superseded_by
+      superseded_by, age_appropriateness, cultural_safety_flag
     ) VALUES (
       @id, @version, @techniqueName, @description, @mechanism, @strategyCategory, @isResponsive,
       @population, @evidenceTier, @evidenceSummary, @sourceIds, @prerequisites,
       @capacityConsiderations, @capacityConsiderationsNote, @contraindications,
       @safetyBoundary, @measurementGuidance, @deliveryFormat, @personalizationAxes,
-      @supersededBy
+      @supersededBy, @ageAppropriateness, @culturalSafetyFlag
     )
     ON CONFLICT(id) DO UPDATE SET
       version = excluded.version,
@@ -132,7 +134,9 @@ function seed(db: Database.Database): void {
       measurement_guidance = excluded.measurement_guidance,
       delivery_format = excluded.delivery_format,
       personalization_axes = excluded.personalization_axes,
-      superseded_by = excluded.superseded_by
+      superseded_by = excluded.superseded_by,
+      age_appropriateness = excluded.age_appropriateness,
+      cultural_safety_flag = excluded.cultural_safety_flag
     WHERE excluded.version > strategy_templates.version
   `);
 
@@ -149,6 +153,8 @@ function seed(db: Database.Database): void {
         sourceIds: JSON.stringify(template.sourceIds),
         capacityConsiderations: JSON.stringify(template.capacityConsiderations),
         personalizationAxes: JSON.stringify(template.personalizationAxes),
+        ageAppropriateness: template.ageAppropriateness ? JSON.stringify(template.ageAppropriateness) : null,
+        culturalSafetyFlag: template.culturalSafetyFlag ? JSON.stringify(template.culturalSafetyFlag) : null,
       });
     }
   });

@@ -7,6 +7,7 @@ import { ParticipantPicker } from "./components/ParticipantPicker";
 import { StrategyBrowser } from "./components/StrategyBrowser";
 import { TemplateDetail } from "./components/TemplateDetail";
 import { RecordsList } from "./components/RecordsList";
+import { BrandLockup } from "./components/BrandLockup";
 
 type View = { name: "browse" } | { name: "template"; templateId: string } | { name: "records" };
 
@@ -27,16 +28,23 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-72 shrink-0 border-r border-slate-200 bg-white">
-        <div className="border-b border-slate-200 p-4">
-          <h1 className="text-base font-semibold text-slate-900">Strategy Library</h1>
-          <p className="mt-0.5 text-xs text-slate-500">Decision support, not diagnostic.</p>
+    <div className="flex min-h-screen flex-col bg-brand-paper md:flex-row">
+      {/*
+        Sidebar chrome (participant picker, nav) stays ink-only, never
+        purple — it's persistent alongside every screen's main content,
+        so keeping it purple-free is what guarantees "one purple element
+        per screen" actually holds once you count the whole layout, not
+        just whatever's in <main>.
+      */}
+      <aside className="w-full shrink-0 border-b border-brand-border bg-brand-paper md:w-72 md:border-b-0 md:border-r">
+        <div className="border-b border-brand-border p-6">
+          <BrandLockup />
+          <p className="mt-2 text-xs text-brand-muted">Strategy Library — decision support, not diagnostic.</p>
         </div>
 
         <ParticipantPicker activeParticipantId={activeParticipantId} onSelect={setActiveParticipantId} />
 
-        <nav className="space-y-1 p-4">
+        <nav className="space-y-1 p-6">
           <NavButton active={view.name === "browse"} onClick={() => setView({ name: "browse" })}>
             Browse strategies
           </NavButton>
@@ -46,21 +54,30 @@ export default function App() {
         </nav>
       </aside>
 
-      <main className="flex-1 p-6">
-        {view.name === "browse" && (
-          <StrategyBrowser
-            activeParticipant={activeParticipant ?? null}
-            onSelectTemplate={(templateId) => setView({ name: "template", templateId })}
-          />
-        )}
-        {view.name === "template" && (
-          <TemplateDetail
-            templateId={view.templateId}
-            activeParticipant={activeParticipant ?? null}
-            onBack={() => setView({ name: "browse" })}
-          />
-        )}
-        {view.name === "records" && <RecordsList activeParticipant={activeParticipant ?? null} />}
+      {/*
+        §4/§5 of the brand kit: cap body-copy line length, don't run text
+        edge to edge on wide screens. A single max-w constraint here
+        covers every screen rather than patching individual paragraphs —
+        768px comfortably fits TemplateDetail's two-column field grid
+        while still keeping prose readable.
+      */}
+      <main className="flex-1 p-8 md:p-16">
+        <div className="mx-auto max-w-3xl">
+          {view.name === "browse" && (
+            <StrategyBrowser
+              activeParticipant={activeParticipant ?? null}
+              onSelectTemplate={(templateId) => setView({ name: "template", templateId })}
+            />
+          )}
+          {view.name === "template" && (
+            <TemplateDetail
+              templateId={view.templateId}
+              activeParticipant={activeParticipant ?? null}
+              onBack={() => setView({ name: "browse" })}
+            />
+          )}
+          {view.name === "records" && <RecordsList activeParticipant={activeParticipant ?? null} />}
+        </div>
       </main>
     </div>
   );
@@ -79,8 +96,8 @@ function NavButton({
     <button
       type="button"
       onClick={onClick}
-      className={`w-full rounded-md px-3 py-2 text-left text-sm font-medium ${
-        active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"
+      className={`w-full rounded-brand px-3 py-2 text-left text-sm font-medium ${
+        active ? "bg-brand-ink text-white" : "text-brand-muted hover:bg-brand-surface"
       }`}
     >
       {children}

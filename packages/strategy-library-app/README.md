@@ -2,7 +2,46 @@
 
 Phase 1 MVP UI for the Strategy Library: browse/filter evidence-based PBS
 strategies and author `PersonalisationRecord`s. Vite + React + TypeScript
-+ Tailwind, PWA (offline-capable).
++ Tailwind, PWA (offline-capable). Fracta Flow branded.
+
+## Branding
+
+Follows `fracta_flow_brand_kit.pdf` exactly (colors, type, spacing, logo
+usage, the one-purple-per-screen rule) — confirmed against the actual
+file, not approximated. See:
+- `src/index.css` / `tailwind.config.js` — design tokens (§3/§4/§5/§7 of
+  the kit), copied verbatim.
+- `src/components/BrandLockup.tsx` + `public/fracta-flow-icon-purple.svg`
+  — the chevron/"F" mark + "FRACTA"(bold)/"FLOW"(regular) wordmark. This
+  uses the same placeholder chevron geometry as the reference
+  `fracta-flow-landing` repo's `Logo.jsx` (which documents it there as a
+  stand-in for the real path data — "do not redraw the chevron by hand in
+  production"). Swap both files for the real SVG when it arrives; nothing
+  else about how the mark is used should need to change.
+
+Styling discipline actually enforced, not just aspirational: every screen
+was audited so exactly one element is brand-purple — the single primary
+CTA (Consent gate's "Continue", TemplateDetail's "Personalise for…",
+the wizard's "Save personalisation record", ExportView's "Copy to
+clipboard") — everything else (sidebar chrome, filters, secondary
+buttons, "Personalise with AI") stays ink/outline. Sidebar chrome in
+particular is deliberately never purple: it's persistent alongside every
+screen's main content, so keeping it purple-free is what makes "one
+purple element per screen" hold once you count the whole layout, not
+just whatever's in `<main>`. No shadows/gradients anywhere; flat fills
+and hairline borders only; no colors outside the kit's six (callouts that
+would conventionally be red/amber/green — safety boundaries, refusals,
+cultural safety flags — use ink-on-surface with a bold label and a
+left-border accent instead of hue, since the kit caps the palette at six
+colors with no carve-out for semantic/status colors).
+
+Verified with a full headless-browser screenshot pass at both 1440px
+desktop and 390px mobile across every screen (consent gate, browse,
+template detail, personalisation wizard, records, export). That pass
+caught and fixed a real mobile bug: the sidebar didn't collapse below
+`md:`, cutting off main content entirely on phone-width viewports — the
+outer layout is now `flex-col` below `md:` and `flex-row` at `md:` and
+up.
 
 ## What's here
 

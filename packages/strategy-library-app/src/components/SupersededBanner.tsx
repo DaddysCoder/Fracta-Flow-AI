@@ -18,10 +18,10 @@ export function SupersededBanner({ template }: { template: StrategyTemplate }) {
   if (!current || current.id === template.id) return null;
 
   return (
-    <div className="rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
-      <p className="font-medium">This figure has been superseded by newer evidence.</p>
-      <p className="mt-1">
-        Current: <span className="font-medium">{current.techniqueName}</span> —{" "}
+    <div className="rounded-brand border-l-4 border-brand-ink bg-brand-surface p-3 text-sm text-brand-ink">
+      <p className="font-medium">Superseded by newer evidence</p>
+      <p className="mt-1 text-brand-muted">
+        Current: <span className="font-medium text-brand-ink">{current.techniqueName}</span> —{" "}
         {current.evidenceSummary}
       </p>
     </div>

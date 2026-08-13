@@ -36,6 +36,11 @@ const {
  * blank on first launch. Guarded against here by checking
  * `participants === undefined` (still loading) before checking
  * `participants.length === 0` (loaded, genuinely empty).
+ *
+ * Styling note: everything here stays ink/outline, never purple — this
+ * sidebar is persistent alongside whatever's in <main>, so keeping it
+ * purple-free is what makes "one purple element per screen" hold once
+ * you count the whole layout, not just the main content area.
  */
 export function ParticipantPicker({
   activeParticipantId,
@@ -48,17 +53,17 @@ export function ParticipantPicker({
   const [showCreate, setShowCreate] = useState(false);
 
   if (participants === undefined) {
-    return <div className="p-4 text-sm text-slate-500">Loading participants…</div>;
+    return <div className="p-6 text-sm text-brand-muted">Loading participants…</div>;
   }
 
   return (
-    <div className="space-y-3 p-4">
-      <h2 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+    <div className="space-y-3 p-6">
+      <h2 className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
         Active participant
       </h2>
 
       {participants.length === 0 && !showCreate && (
-        <p className="text-sm text-slate-500">No local participants yet.</p>
+        <p className="text-sm text-brand-muted">No local participants yet.</p>
       )}
 
       <ul className="space-y-1">
@@ -67,10 +72,10 @@ export function ParticipantPicker({
             <button
               type="button"
               onClick={() => onSelect(p.id)}
-              className={`w-full rounded-md px-3 py-2 text-left text-sm ${
+              className={`w-full rounded-brand px-3 py-2 text-left text-sm ${
                 p.id === activeParticipantId
-                  ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-700 hover:bg-slate-100"
+                  ? "bg-brand-ink text-white"
+                  : "bg-brand-paper text-brand-ink hover:bg-brand-surface"
               }`}
             >
               Participant {p.id.slice(0, 8)}
@@ -92,7 +97,7 @@ export function ParticipantPicker({
         <button
           type="button"
           onClick={() => setShowCreate(true)}
-          className="w-full rounded-md border border-dashed border-slate-300 px-3 py-2 text-sm text-slate-600 hover:border-slate-400"
+          className="w-full rounded-brand border border-dashed border-brand-border px-3 py-2 text-sm text-brand-muted hover:border-brand-ink"
         >
           + New participant
         </button>
@@ -143,52 +148,52 @@ function CreateParticipantForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2 rounded-md border border-slate-200 bg-white p-3">
+    <form onSubmit={handleSubmit} className="space-y-2 rounded-brand border border-brand-border bg-brand-paper p-3">
       <div>
-        <label className="block text-xs font-medium text-slate-600">Age</label>
+        <label className="block text-xs font-medium text-brand-muted">Age</label>
         <input
           type="number"
           value={age}
           onChange={(e) => setAge(e.target.value)}
-          className="mt-1 w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          className="mt-1 w-full rounded border border-brand-border px-2 py-1 text-sm"
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600">
+        <label className="block text-xs font-medium text-brand-muted">
           Cultural constraints (pre-filter, free text)
         </label>
         <textarea
           value={culturalConstraints}
           onChange={(e) => setCulturalConstraints(e.target.value)}
           rows={2}
-          className="mt-1 w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          className="mt-1 w-full rounded border border-brand-border px-2 py-1 text-sm"
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600">Interests (comma separated)</label>
+        <label className="block text-xs font-medium text-brand-muted">Interests (comma separated)</label>
         <input
           type="text"
           value={interestsGeneral}
           onChange={(e) => setInterestsGeneral(e.target.value)}
           placeholder="trains, dinosaurs, music"
-          className="mt-1 w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          className="mt-1 w-full rounded border border-brand-border px-2 py-1 text-sm"
         />
       </div>
       <div>
-        <label className="block text-xs font-medium text-slate-600">Communication mode</label>
+        <label className="block text-xs font-medium text-brand-muted">Communication mode</label>
         <input
           type="text"
           value={communicationMode}
           onChange={(e) => setCommunicationMode(e.target.value)}
           placeholder="verbal, AAC, gesture…"
-          className="mt-1 w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          className="mt-1 w-full rounded border border-brand-border px-2 py-1 text-sm"
         />
       </div>
       <div className="flex gap-2 pt-1">
-        <button type="submit" className="rounded bg-slate-900 px-3 py-1.5 text-xs font-medium text-white">
+        <button type="submit" className="rounded border border-brand-ink px-3 py-1.5 text-xs font-medium text-brand-ink">
           Save
         </button>
-        <button type="button" onClick={onCancel} className="rounded px-3 py-1.5 text-xs text-slate-500">
+        <button type="button" onClick={onCancel} className="rounded px-3 py-1.5 text-xs text-brand-muted">
           Cancel
         </button>
       </div>

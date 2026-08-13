@@ -9,6 +9,8 @@ const { SEED_SOURCES, SEED_TEMPLATES, assembleExportText } = StrategyLibraryCore
 /**
  * Assembles, doesn't generate — matches the FBA tool's DocumentationExport
  * pattern. Offers copy-to-clipboard and a plain-text file download.
+ * "Copy to clipboard" is this modal's one purple element; "Download" and
+ * "Close" stay ink/outline.
  */
 export function ExportView({ record, onClose }: { record: PersonalisationRecord; onClose: () => void }) {
   const [copied, setCopied] = useState(false);
@@ -17,7 +19,7 @@ export function ExportView({ record, onClose }: { record: PersonalisationRecord;
   if (!foundTemplate) {
     return (
       <Modal onClose={onClose}>
-        <p className="text-sm text-red-600">Template not found for this record.</p>
+        <p className="text-sm text-brand-ink">Template not found for this record.</p>
       </Modal>
     );
   }
@@ -44,26 +46,26 @@ export function ExportView({ record, onClose }: { record: PersonalisationRecord;
 
   return (
     <Modal onClose={onClose}>
-      <h3 className="text-sm font-semibold text-slate-900">Plan-ready export</h3>
-      <pre className="mt-2 max-h-96 overflow-auto whitespace-pre-wrap rounded-md bg-slate-50 p-3 text-xs text-slate-800">
+      <h3 className="text-base text-brand-ink">Plan-ready export</h3>
+      <pre className="mt-3 max-h-96 overflow-auto whitespace-pre-wrap rounded-brand border border-brand-border bg-brand-surface p-3 text-xs text-brand-ink">
         {text}
       </pre>
-      <div className="mt-3 flex gap-2">
+      <div className="mt-4 flex gap-2">
         <button
           type="button"
           onClick={handleCopy}
-          className="rounded bg-slate-900 px-3 py-1.5 text-xs font-medium text-white"
+          className="rounded-brand bg-brand-purple px-3 py-1.5 text-xs font-medium text-white"
         >
           {copied ? "Copied!" : "Copy to clipboard"}
         </button>
         <button
           type="button"
           onClick={handleDownload}
-          className="rounded border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700"
+          className="rounded-brand border border-brand-border px-3 py-1.5 text-xs font-medium text-brand-ink hover:border-brand-ink"
         >
           Download .txt
         </button>
-        <button type="button" onClick={onClose} className="ml-auto rounded px-3 py-1.5 text-xs text-slate-500">
+        <button type="button" onClick={onClose} className="ml-auto rounded-brand px-3 py-1.5 text-xs text-brand-muted">
           Close
         </button>
       </div>
@@ -73,9 +75,9 @@ export function ExportView({ record, onClose }: { record: PersonalisationRecord;
 
 function Modal({ children, onClose }: { children: ReactNode; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/50 p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-brand-ink/50 p-4" onClick={onClose}>
       <div
-        className="w-full max-w-lg rounded-lg bg-white p-4 shadow-xl"
+        className="w-full max-w-lg rounded-brand border border-brand-border bg-brand-paper p-6"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

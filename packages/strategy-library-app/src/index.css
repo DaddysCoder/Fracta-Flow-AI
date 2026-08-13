@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Fracta Flow brand tokens — source of truth is fracta_flow_brand_kit.pdf
+ * (§3 Color, §4 Typography, §5 Layout & spacing, §7 quick-reference
+ * tokens), confirmed against the actual file. If it's ever revised, this
+ * block (and tailwind.config.js, which mirrors it) is the only place to
+ * change.
+ */
+:root {
+  --color-purple: #7b2ff7; /* one accent, used sparingly — primary CTA, one icon, one highlight per screen */
+  --color-ink: #111111; /* body copy, headings */
+  --color-paper: #ffffff; /* default background */
+  --color-surface: #f5f5f5; /* section separation, flat cards, no shadow */
+  --color-border: #e5e5e5; /* hairline dividers only */
+  --color-muted: #6b6b6b; /* secondary/supporting copy */
+
+  --font-display: "Montserrat", sans-serif; /* weight 700, headings only */
+  --font-body: "Nunito", sans-serif; /* weight 400, body/UI text */
+
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --radius: 8px;
+}
+
 html,
 body,
 #root {
@@ -9,5 +37,17 @@ body,
 }
 
 body {
-  @apply bg-slate-50 text-slate-900;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
 }

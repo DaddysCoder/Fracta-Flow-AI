@@ -67,7 +67,7 @@ need re-tagging into the six real categories; see the content-gap note in
   `StrategyTemplateRepository.resolveCurrent(id)` follows the chain to the
   current template for this purpose.
 
-## Eligibility filtering — a flagged schema gap
+## Eligibility filtering — a deliberate pass-through
 
 The brief calls for filtering the strategy list against a participant's
 `age` and `culturalConstraints` (from the Participant Profile module)
@@ -77,15 +77,33 @@ split (`getEligibilityFilters()` vs. `getPersonalisationContext()`) is
 already enforced by `@fracta-flow/participant-profile`, and this package
 consumes it rather than re-implementing participant access.
 
-However: **the v2 `StrategyTemplate` schema has no age-range or
-cultural-exclusion fields to filter against.** `population` records what
-the evidence studied, not an exclusion list. Rather than inventing
-keyword-matching heuristics against free text (which would smuggle in the
-"ranking / recommended-for-this-case logic" Phase 1 explicitly excludes),
-`src/eligibility.ts`'s `isEligible()` is a documented pass-through today,
-with the gap flagged for the product owner. If hard age/culture exclusion
-is required before Phase 1 ships, `StrategyTemplate` needs explicit fields
-for it first — that's a schema decision, not something to paper over here.
+`StrategyTemplate` now carries `ageAppropriateness` and
+`culturalSafetyFlag` (practitioner-authored, optional — see below), but
+neither is wired into `isEligible()`. Both are guidance surfaced on the
+template detail view, not a hard eligibility gate: there's no NDIS-defined
+age bracket for PBS strategies to derive a real filter from, and turning a
+partially-filled, free-text cultural note into silent exclusion logic
+would smuggle in the "ranking / recommended-for-this-case logic" Phase 1
+explicitly excludes. `src/eligibility.ts`'s `isEligible()` stays a
+documented pass-through. If hard age/culture exclusion is ever required,
+that's a product decision to revisit deliberately — not something to back
+into via these fields.
+
+## Age appropriateness and cultural safety (practitioner-authored guidance)
+
+Two optional fields on `StrategyTemplate`, added for the Fracta Flow
+branding pass:
+
+- `ageAppropriateness?: { minAge?, maxAge?, note? }` — guidance only,
+  never a filter. Rendered as a note on the template detail view.
+- `culturalSafetyFlag?: { hasConsiderations: boolean, note?: string }` —
+  free text, no enum/taxonomy ("flag it, don't design it"). When
+  `hasConsiderations` is true, rendered as a prominent callout; otherwise
+  nothing extra is shown.
+
+Both are left unset on all 15 seed entries — authoring real values is a
+clinical-content decision, not a coding task, so nothing here is
+backfilled or guessed.
 
 ## Seed content
 

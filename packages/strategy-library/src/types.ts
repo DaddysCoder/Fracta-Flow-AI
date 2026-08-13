@@ -107,6 +107,30 @@ export interface StrategyTemplate {
   personalizationAxes: PersonalisationAxis[];
   /** Nullable FK to another StrategyTemplate that supersedes this one's figures. */
   supersededBy: string | null;
+  /**
+   * Practitioner-authored guidance, not a hard eligibility gate — there is
+   * no NDIS-defined age bracket for PBS strategies, so this is never
+   * derived from an external standard. Optional and left unset where no
+   * real judgement has been made yet; never wired into `isEligible()` as
+   * a filter. Surfaced as a visible note on the template detail view —
+   * the practitioner still makes the call.
+   */
+  ageAppropriateness?: {
+    minAge?: number;
+    maxAge?: number;
+    note?: string;
+  };
+  /**
+   * Practitioner/reviewer-authored, free text only — no enum/taxonomy,
+   * preserving "flag it, don't design it" for cultural content. When
+   * `hasConsiderations` is true, the note is surfaced prominently on the
+   * template detail view. Optional and left unset where no real
+   * judgement has been made yet.
+   */
+  culturalSafetyFlag?: {
+    hasConsiderations: boolean;
+    note?: string;
+  };
 }
 
 /** StrategyTemplate with its StrategySource records resolved. */

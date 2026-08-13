@@ -40,6 +40,8 @@ interface TemplateRow {
   delivery_format: string;
   personalization_axes: string;
   superseded_by: string | null;
+  age_appropriateness: string | null;
+  cultural_safety_flag: string | null;
 }
 
 function parseJson<T>(value: string, fallback: T): T {
@@ -48,6 +50,16 @@ function parseJson<T>(value: string, fallback: T): T {
     return JSON.parse(value) as T;
   } catch {
     return fallback;
+  }
+}
+
+/** Unlike parseJson, a NULL/unparseable column means "unset", not a fallback value. */
+function parseOptionalJson<T>(value: string | null): T | undefined {
+  if (!value) return undefined;
+  try {
+    return JSON.parse(value) as T;
+  } catch {
+    return undefined;
   }
 }
 
@@ -84,6 +96,8 @@ function rowToTemplate(row: TemplateRow): StrategyTemplate {
     deliveryFormat: row.delivery_format,
     personalizationAxes: parseJson<PersonalisationAxis[]>(row.personalization_axes, []),
     supersededBy: row.superseded_by,
+    ageAppropriateness: parseOptionalJson<StrategyTemplate["ageAppropriateness"]>(row.age_appropriateness),
+    culturalSafetyFlag: parseOptionalJson<StrategyTemplate["culturalSafetyFlag"]>(row.cultural_safety_flag),
   };
 }
 

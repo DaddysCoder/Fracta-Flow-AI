@@ -10,19 +10,18 @@ import type { StrategyTemplate } from "./types";
  * this module only consumes `getEligibilityFilters()`'s output, it does
  * not re-implement participant data access.
  *
- * IMPORTANT SCHEMA GAP: the v2 StrategyTemplate schema does not (yet)
- * define any per-template age-range or cultural-exclusion fields to filter
- * against — `population` is "what the evidence studied", not an
- * age/culture exclusion list, and nothing else on the template carries
- * that metadata. So `isEligible` below is currently a pass-through: every
- * template is eligible for every participant. This is intentionally NOT
- * papered over with invented heuristics (e.g. keyword-matching
- * `culturalConstraints` text against `contraindications`), since Phase 1
- * explicitly excludes "any ranking or recommended-for-this-case logic
- * beyond static category/filter browsing" and inventing semantic matching
- * would cross that line. Flagging for the product owner: if hard
- * age/culture exclusion is required before Phase 1 ships, StrategyTemplate
- * needs explicit fields for it first.
+ * STILL A DELIBERATE PASS-THROUGH: `StrategyTemplate.ageAppropriateness`
+ * and `culturalSafetyFlag` exist (Fracta Flow branding + schema pass), but
+ * neither is wired in here on purpose. Both are practitioner-authored
+ * guidance surfaced as a visible note on the template detail view, not a
+ * hard eligibility gate — there is no NDIS-defined age bracket for PBS
+ * strategies to derive a real filter from, and turning a partially-filled,
+ * free-text cultural note into silent exclusion logic would cross the
+ * "no ranking/recommended-for-this-case logic beyond static category/
+ * filter browsing" line Phase 1 draws. `isEligible` below stays a
+ * pass-through: every template is eligible for every participant. If hard
+ * age/culture exclusion is ever required, that's a product decision to
+ * revisit deliberately, not something to back into via these fields.
  */
 export function isEligible(_template: StrategyTemplate, _eligibility: EligibilityFilters): boolean {
   return true;

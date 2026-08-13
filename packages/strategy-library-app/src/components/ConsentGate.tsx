@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { acknowledgeConsent } from "../lib/consent";
+import { BrandIcon } from "./BrandLockup";
 
 /**
  * Same disclaimer/consent gate posture as the FBA tool: decision support,
@@ -12,12 +13,13 @@ export function ConsentGate({ onAcknowledge }: { onAcknowledge: () => void }) {
   const [checked, setChecked] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 p-4">
-      <div className="max-w-lg rounded-lg bg-white p-6 shadow-xl">
-        <h1 className="text-lg font-semibold text-slate-900">Before you continue</h1>
-        <div className="mt-3 space-y-3 text-sm text-slate-600">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-ink/60 p-4">
+      <div className="max-w-lg rounded-brand border border-brand-border bg-brand-paper p-8">
+        <BrandIcon size={32} />
+        <h1 className="mt-4 text-lg text-brand-ink">Before you continue</h1>
+        <div className="mt-3 space-y-3 text-sm text-brand-muted">
           <p>
-            The Strategy Library is a <strong>decision support tool, not a diagnostic one</strong>.
+            The Strategy Library is a <strong className="text-brand-ink">decision support tool, not a diagnostic one</strong>.
             It surfaces evidence-based strategy content for you to review — it never selects or
             generates a strategy on its own.
           </p>
@@ -31,7 +33,7 @@ export function ConsentGate({ onAcknowledge }: { onAcknowledge: () => void }) {
             you create are stored locally in this browser only.
           </p>
         </div>
-        <label className="mt-5 flex items-start gap-2 text-sm text-slate-700">
+        <label className="mt-5 flex items-start gap-2 text-sm text-brand-ink">
           <input
             type="checkbox"
             className="mt-0.5"
@@ -47,7 +49,7 @@ export function ConsentGate({ onAcknowledge }: { onAcknowledge: () => void }) {
             acknowledgeConsent();
             onAcknowledge();
           }}
-          className="mt-4 w-full rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="mt-6 w-full rounded-brand bg-brand-purple px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-brand-border disabled:text-brand-muted"
         >
           Continue
         </button>

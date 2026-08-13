@@ -27,42 +27,42 @@ export function RecordsList({ activeParticipant }: { activeParticipant: Particip
   );
 
   if (!activeParticipant) {
-    return <p className="text-sm text-slate-500">Select a participant to see their records.</p>;
+    return <p className="text-sm text-brand-muted">Select a participant to see their records.</p>;
   }
 
   if (records === undefined) {
-    return <p className="text-sm text-slate-500">Loading records…</p>;
+    return <p className="text-sm text-brand-muted">Loading records…</p>;
   }
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-sm font-semibold text-slate-900">
+    <div className="space-y-6">
+      <h2 className="text-base text-brand-ink">
         Records for participant {activeParticipant.id.slice(0, 8)}
       </h2>
 
       {records.length === 0 && (
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-brand-muted">
           No personalisation records yet. Browse strategies and personalise one for this
           participant.
         </p>
       )}
 
-      <ul className="space-y-2">
+      <ul className="space-y-3">
         {records.map((r) => {
           const template = SEED_TEMPLATES.find((t) => t.id === r.strategyTemplateId);
           return (
-            <li key={r.id} className="rounded-lg border border-slate-200 bg-white p-4">
+            <li key={r.id} className="rounded-brand border border-brand-border bg-brand-paper p-4">
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <h3 className="font-medium text-slate-900">
+                  <h3 className="font-medium text-brand-ink">
                     {template?.techniqueName ?? r.strategyTemplateId}
                   </h3>
-                  <p className="mt-1 text-sm text-slate-600">{r.personalisedActivity}</p>
-                  <p className="mt-2 text-xs text-slate-400">
+                  <p className="mt-1 text-sm text-brand-muted">{r.personalisedActivity}</p>
+                  <p className="mt-2 text-xs text-brand-muted">
                     {r.status} · authored by {r.authoredBy || "—"} on{" "}
                     {new Date(r.authoredAt).toLocaleDateString()}
                     {template && template.version !== r.templateVersionUsed && (
-                      <span className="ml-2 text-amber-600">
+                      <span className="ml-2 font-medium text-brand-ink">
                         · template updated since (v{r.templateVersionUsed} → v{template.version})
                       </span>
                     )}
@@ -71,7 +71,7 @@ export function RecordsList({ activeParticipant }: { activeParticipant: Particip
                 <button
                   type="button"
                   onClick={() => setExporting(r)}
-                  className="whitespace-nowrap rounded border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-700 hover:border-slate-400"
+                  className="whitespace-nowrap rounded-brand border border-brand-border px-2.5 py-1 text-xs font-medium text-brand-ink hover:border-brand-ink"
                 >
                   Export
                 </button>
