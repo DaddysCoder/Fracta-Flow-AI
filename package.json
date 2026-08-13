@@ -1,25 +1,14 @@
 {
-  "name": "@fracta-flow/participant-profile",
-  "version": "0.1.0",
-  "description": "Standalone data module holding what's known about a participant as a person, for personalising strategies in the Strategy Library.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "type": "commonjs",
+  "name": "fracta-flow-ai",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Fracta Flow AI suite — practitioner-owned, local-first PBS tooling.",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
   },
-  "license": "UNLICENSED",
-  "dependencies": {
-    "better-sqlite3": "^11.3.0",
-    "uuid": "^9.0.1"
-  },
-  "devDependencies": {
-    "@types/better-sqlite3": "^7.6.11",
-    "@types/node": "^20.14.0",
-    "@types/uuid": "^9.0.8",
-    "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
-  }
+  "license": "UNLICENSED"
 }
