@@ -8,6 +8,7 @@ import type {
   StrategyTemplate,
   StrategyTemplateWithSources,
 } from "./types";
+import { resolveCurrentTemplate } from "./supersede";
 
 interface SourceRow {
   id: string;
@@ -142,15 +143,7 @@ export class StrategyTemplateRepository {
    * still surface the original for the "alongside" case via `get()`.
    */
   resolveCurrent(id: string): StrategyTemplate | null {
-    const seen = new Set<string>();
-    let current = this.get(id);
-    while (current?.supersededBy && !seen.has(current.id)) {
-      seen.add(current.id);
-      const next = this.get(current.supersededBy);
-      if (!next) break;
-      current = next;
-    }
-    return current;
+    return resolveCurrentTemplate(id, new Map(this.list().map((t) => [t.id, t])));
   }
 
   private resolveSources(sourceIds: string[]): StrategySource[] {

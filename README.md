@@ -16,6 +16,10 @@ package under `packages/`, designed to be used standalone or together.
   cited) plus practitioner-authored, participant-linked
   `PersonalisationRecord`s. Reads eligibility/personalisation data from
   `participant-profile` rather than re-implementing participant access.
+- [`packages/strategy-library-app`](packages/strategy-library-app/README.md) —
+  the Phase 1 MVP UI: a Vite + React + TypeScript + Tailwind PWA for
+  browsing/filtering strategies and authoring personalisation records,
+  offline-capable via Dexie (IndexedDB) for local storage.
 
 ## Development
 

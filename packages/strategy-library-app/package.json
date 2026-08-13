@@ -1,0 +1,33 @@
+{
+  "name": "@fracta-flow/strategy-library-app",
+  "version": "0.1.0",
+  "description": "Phase 1 MVP UI for the Strategy Library: browse/filter evidence-based PBS strategies and author PersonalisationRecords. PWA, offline-capable.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "echo \"no tests in this package yet\" && exit 0"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fracta-flow/participant-profile": "*",
+    "@fracta-flow/strategy-library": "*",
+    "dexie": "^4.0.8",
+    "dexie-react-hooks": "^1.1.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.3",
+    "vite-plugin-pwa": "^0.20.0"
+  }
+}

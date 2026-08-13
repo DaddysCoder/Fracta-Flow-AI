@@ -5,5 +5,6 @@ export type { TemplateFilter } from "./templateRepository";
 export { PersonalisationRecordRepository } from "./personalisationRepository";
 export { isEligible, filterEligibleTemplates } from "./eligibility";
 export { assembleExportText } from "./exportText";
+export { resolveCurrentTemplate } from "./supersede";
 export { SEED_SOURCES } from "./seed/sources";
 export { SEED_TEMPLATES } from "./seed/templates";
