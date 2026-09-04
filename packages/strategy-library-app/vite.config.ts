@@ -29,6 +29,35 @@ export default defineConfig({
         find: "@fracta-flow/strategy-library/core",
         replacement: path.resolve(dirname, "../strategy-library/src/core.ts"),
       },
+      // @fracta-flow/evidence-layer's compiled dist imports the bare
+      // "@fracta-flow/retrieval-core" specifier internally (ranking.ts,
+      // candidateAdapter.ts, intent.ts), which by default resolves to
+      // retrieval-core's full index.ts — server-only ingestion (mammoth/
+      // pdf-parse, which pulls in @napi-rs/canvas's native .node binaries)
+      // and node:crypto/node:fs security helpers neither browser bundling
+      // nor Vite's dev-mode dependency scan can load. Aliasing the bare
+      // specifier itself (not a subpath) redirects every resolution of it
+      // across the whole bundle — including from inside evidence-layer's
+      // own compiled output — to retrieval-core's browser-safe subset
+      // (see retrieval-core/src/browser.ts), which exports exactly the
+      // pure ranking/tokenizing functions evidence-layer actually calls at
+      // query time and nothing that touches Node or native modules.
+      {
+        find: "@fracta-flow/retrieval-core",
+        replacement: path.resolve(dirname, "../retrieval-core/src/browser.ts"),
+      },
+      // @fracta-flow/evidence-layer's own compiled dist/index.js is
+      // CommonJS too, and hits the exact same interop gap the comment atop
+      // ParticipantPicker.tsx describes — Rollup's production build wraps
+      // it correctly via the commonjs plugin, but Vite dev's esbuild
+      // dependency pre-bundling doesn't, and serves it to the browser as
+      // if it were already ESM (`exports is not defined` at runtime).
+      // Aliasing straight to its real ESM TypeScript source sidesteps the
+      // interop question entirely, same as the two aliases above.
+      {
+        find: "@fracta-flow/evidence-layer",
+        replacement: path.resolve(dirname, "../evidence-layer/src/index.ts"),
+      },
     ],
   },
   plugins: [
