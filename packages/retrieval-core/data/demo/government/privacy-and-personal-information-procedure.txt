@@ -1,0 +1,18 @@
+Privacy and Personal Information Procedure
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This procedure explains how FDDS staff must collect, use, store and disclose personal information in accordance with the Privacy Act and the Australian Privacy Principles, and how it applies protective security requirements to information about individuals.
+
+2. Collecting personal information
+Personal information must only be collected where it is reasonably necessary for a departmental function, and individuals must be told why it is being collected, how it will be used, and who it may be disclosed to. Staff must not collect more personal information than is required for the task at hand.
+
+3. Storage and access
+Personal information must be stored in an approved departmental system with access restricted to staff who have a genuine business need. Personal information must not be emailed to personal accounts, printed unnecessarily, or stored on unencrypted removable media. Where personal information is shared with a contracted service provider, the contract must include privacy obligations consistent with the Australian Privacy Principles.
+
+4. What to do if personal information is exposed
+If personal information is lost, accessed without authorisation, or otherwise exposed, staff must immediately notify the Security Operations team and follow the Incident and Data Breach Response Procedure. The department must assess whether the exposure is likely to result in serious harm and, if so, notify affected individuals and the Office of the Australian Information Commissioner (OAIC) under the Notifiable Data Breaches scheme, generally within 30 days of becoming aware of the breach.
+
+5. Individual rights
+Individuals may request access to, or correction of, personal information FDDS holds about them. Requests should be directed to the Privacy Officer, who will coordinate a response consistent with the Australian Privacy Principles and, where relevant, the Freedom of Information Act. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth privacy procedure.

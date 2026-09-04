@@ -1,0 +1,18 @@
+Incident and Data Breach Response Procedure
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This procedure sets out how FDDS staff must identify, escalate and respond to information security incidents and data breaches, consistent with the Protective Security Policy Framework (PSPF), the Information Security Manual (ISM), and the Notifiable Data Breaches scheme.
+
+2. What is an incident
+An incident includes any actual or suspected compromise of official information, systems or credentials, unauthorised access to or disclosure of personal information, malware detection, loss of a departmental device, or a suspected phishing attempt. If in doubt, staff should report it — it is always better to report a suspected incident than to wait for certainty.
+
+3. Immediate steps
+Staff who identify a suspected incident must immediately notify the Security Operations team through the incident reporting channel, and must not attempt to investigate, delete evidence, or notify external parties themselves. Where personal information may have been exposed, the Privacy and Personal Information Procedure also applies.
+
+4. Assessment and containment
+Security Operations will triage the report, contain the incident where possible, and determine severity. For incidents involving personal information, the department must assess within 30 days whether the breach is likely to result in serious harm, in accordance with the Notifiable Data Breaches scheme, and where required, notify the Office of the Australian Information Commissioner (OAIC) and affected individuals.
+
+5. Reporting and lessons learned
+Significant incidents are reported to the FDDS Governance Committee and, where required, to the Australian Signals Directorate. A post-incident review identifies root cause and any control improvements, and outcomes are recorded in line with the Records Management Policy. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth incident response procedure.

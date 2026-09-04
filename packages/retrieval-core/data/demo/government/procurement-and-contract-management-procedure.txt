@@ -1,0 +1,18 @@
+Procurement and Contract Management Procedure
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Scope
+This procedure applies to all procurement activity undertaken by or on behalf of FDDS, and gives effect to the department's obligations under the Public Governance, Performance and Accountability Act (PGPA Act) and the Commonwealth Procurement Rules (CPRs). It covers requests for tender (RFT), requests for quote (RFQ), expressions of interest (EOI) and requests for information (RFI).
+
+2. Before going to tender
+Before approaching the market, the delegate responsible for the procurement must confirm there is an approved business case, that funds are available, and that the proposed approach is consistent with the value for money principle in the CPRs. Procurements above the relevant CPR threshold must be conducted through an open approach to market unless a limited tender exemption applies and has been approved in writing by an appropriately senior delegate.
+
+3. Approval and delegation
+Only officials holding a current financial delegation may approve a procurement, execute a contract or approve a variation, in accordance with the department's Delegations and Approval Authority Guide. Delegates must record their approval, the value of the contract, and the basis on which value for money was assessed. Contracts above the applicable threshold are reported on AusTender in accordance with CPR disclosure requirements.
+
+4. Contract management
+Once a contract is executed, the responsible business area must monitor supplier performance against agreed key performance indicators (KPIs) and service level agreements (SLAs), manage risk, and retain all procurement records in line with the department's Records Management Policy. Any material change to scope, price or timeframe requires a documented contract variation and delegate approval.
+
+5. Probity and conflicts of interest
+Staff involved in a procurement must declare any actual, potential or perceived conflict of interest before participating in evaluation. Probity advice should be sought for high-risk or high-value procurements. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth procurement process.
