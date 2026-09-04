@@ -12,6 +12,7 @@
   },
   "license": "UNLICENSED",
   "dependencies": {
+    "@fracta-flow/evidence-layer": "*",
     "@fracta-flow/participant-profile": "*",
     "@fracta-flow/strategy-library": "*",
     "dexie": "^4.0.8",

@@ -7,9 +7,14 @@ import { ParticipantPicker } from "./components/ParticipantPicker";
 import { StrategyBrowser } from "./components/StrategyBrowser";
 import { TemplateDetail } from "./components/TemplateDetail";
 import { RecordsList } from "./components/RecordsList";
+import { EvidenceSearch } from "./components/EvidenceSearch";
 import { BrandLockup } from "./components/BrandLockup";
 
-type View = { name: "browse" } | { name: "template"; templateId: string } | { name: "records" };
+type View =
+  | { name: "browse" }
+  | { name: "template"; templateId: string }
+  | { name: "records" }
+  | { name: "evidence" };
 
 export default function App() {
   const [acknowledged, setAcknowledged] = useState(hasAcknowledgedConsent());
@@ -51,6 +56,9 @@ export default function App() {
           <NavButton active={view.name === "records"} onClick={() => setView({ name: "records" })}>
             My records
           </NavButton>
+          <NavButton active={view.name === "evidence"} onClick={() => setView({ name: "evidence" })}>
+            Evidence
+          </NavButton>
         </nav>
       </aside>
 
@@ -77,6 +85,7 @@ export default function App() {
             />
           )}
           {view.name === "records" && <RecordsList activeParticipant={activeParticipant ?? null} />}
+          {view.name === "evidence" && <EvidenceSearch activeParticipant={activeParticipant ?? null} />}
         </div>
       </main>
     </div>

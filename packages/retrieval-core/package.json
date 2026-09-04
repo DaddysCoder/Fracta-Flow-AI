@@ -4,6 +4,16 @@
   "description": "Deterministic, local, encrypted document retrieval — forked from rag-work's benchmarked retrieval pipeline (tokenize/expand, BM25-style rank, extractive snippet selection, AES-256-GCM + blind-index crypto primitives). Ported for reuse outside rag-work's single-workspace Next.js/Postgres deployment; the ranking/text-search logic is unmodified, the crypto layer is parameterized (no ambient key state) so a host app owns its own key custody.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "default": "./dist/core.js"
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",

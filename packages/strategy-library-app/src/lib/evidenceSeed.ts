@@ -1,0 +1,140 @@
+import type { StructuredKnowledgeRecord } from "@fracta-flow/evidence-layer/core";
+
+/**
+ * Bundled, in-memory, read-only placeholder evidence — same status as
+ * strategy-library's SEED_TEMPLATES ("centrally-hosted published content,
+ * bundled, in-memory, read-only in this app"). There is no evidence
+ * ingestion/authoring UI yet (see HANDOFF.md's "next part" list); this is
+ * enough real content for the Evidence tab's search/ranking to demonstrate
+ * tier gating, supersession, and workflow-aware ranking against, not a
+ * substitute for a real org's approved knowledge base.
+ *
+ * `participantRef: null` records are org-wide; the two `"demo-participant"`
+ * records only appear once a participant is selected via ParticipantPicker
+ * and its id happens to match — in this seed data nothing does, so they're
+ * effectively dormant until a real per-participant record source exists.
+ * Kept here anyway so the tier-priority behaviour (a participant-specific
+ * record outranking an org procedure) is visible in the code, not just
+ * asserted in evidence-layer's own tests.
+ */
+export const SEED_EVIDENCE_RECORDS: StructuredKnowledgeRecord[] = [
+  {
+    id: "evidence-sensory-break",
+    approvalStatus: "approved",
+    version: 2,
+    effectiveDate: "2025-03-01",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "org_procedure_current",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-sensory-break",
+    strategyType: "sensory break",
+    behaviourRisk: "sensory overload during loud or crowded environments",
+    triggerContext: "fire alarm drills, assemblies, crowded transitions",
+    earlyWarningSign: "covering ears, pacing, seeking the exit",
+    staffAction: "offer noise-cancelling headphones and a quiet space before distress escalates",
+    staffActionToAvoid: "do not force continued participation once early warning signs appear",
+  },
+  {
+    id: "evidence-transport-seatbelt",
+    approvalStatus: "approved",
+    version: 1,
+    effectiveDate: "2024-11-15",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "org_procedure_current",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-transport",
+    strategyType: "seatbelt reminder",
+    behaviourRisk: "unbuckling seatbelt while the vehicle is moving",
+    triggerContext: "entering or riding in a vehicle",
+    earlyWarningSign: "reaching for the buckle, unsettled posture",
+    staffAction: "give a calm seatbelt reminder before the vehicle moves and again at each stop",
+    staffActionToAvoid: "do not start driving before confirming the seatbelt is fastened",
+  },
+  {
+    id: "evidence-incident-debrief",
+    approvalStatus: "approved",
+    version: 3,
+    effectiveDate: "2025-06-01",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "org_procedure_current",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-incident",
+    strategyType: "incident response",
+    behaviourRisk: "escalation to a critical incident requiring restrictive intervention",
+    triggerContext: "after any critical incident",
+    earlyWarningSign: "",
+    staffAction: "complete the incident report and hold a debrief within 24 hours of the incident",
+    staffActionToAvoid: "do not delay reporting pending an informal resolution",
+  },
+  {
+    id: "evidence-restrictive-practice-authorisation",
+    approvalStatus: "approved",
+    version: 1,
+    effectiveDate: "2025-01-10",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "org_procedure_current",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-restrictive-practice",
+    strategyType: "restrictive practice",
+    behaviourRisk: "risk of harm requiring physical restraint",
+    triggerContext: "any proposed use of restraint or seclusion",
+    earlyWarningSign: "",
+    staffAction: "confirm current restrictive practice authorisation before any restraint is used",
+    staffActionToAvoid: "do not use an unauthorised or expired restrictive practice",
+  },
+  {
+    id: "evidence-fba-risk-notes",
+    approvalStatus: "approved",
+    version: 1,
+    effectiveDate: "2025-02-20",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "assessment_evidence",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-fba",
+    strategyType: "functional behaviour assessment",
+    behaviourRisk: "unassessed risk during unstructured transitions",
+    triggerContext: "unstructured transition periods",
+    earlyWarningSign: "",
+    staffAction: "record structured observation data on risk during transitions for the FBA",
+    staffActionToAvoid: "",
+  },
+  {
+    id: "evidence-sensory-break-superseded",
+    approvalStatus: "approved",
+    version: 1,
+    effectiveDate: "2023-05-01",
+    current: false,
+    supersededBy: "evidence-sensory-break",
+    evidenceAuthorityTier: "historical_superseded",
+    participantRef: null,
+    sourceDocumentId: "seed-doc-sensory-break-v1",
+    strategyType: "sensory break",
+    behaviourRisk: "sensory overload during loud or crowded environments",
+    triggerContext: "fire alarm drills, assemblies, crowded transitions",
+    earlyWarningSign: "",
+    staffAction: "move the participant to another room without warning during alarm drills",
+    staffActionToAvoid: "",
+  },
+  {
+    id: "evidence-demo-participant-plan",
+    approvalStatus: "approved",
+    version: 1,
+    effectiveDate: "2025-07-01",
+    current: true,
+    supersededBy: null,
+    evidenceAuthorityTier: "current_participant_plan",
+    participantRef: "demo-participant",
+    sourceDocumentId: "seed-doc-demo-plan",
+    strategyType: "sensory break",
+    behaviourRisk: "sensory overload during loud or crowded environments",
+    triggerContext: "fire alarm drills, assemblies, crowded transitions",
+    earlyWarningSign: "covering ears, asking to leave the room",
+    staffAction: "offer the participant's own headphones and their preferred quiet corner immediately",
+    staffActionToAvoid: "do not offer the generic quiet room — this participant finds it too small",
+  },
+];

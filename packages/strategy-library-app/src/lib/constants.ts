@@ -1,4 +1,5 @@
 import type { StrategyCategory, EvidenceTier } from "@fracta-flow/strategy-library/core";
+import type { EvidenceAuthorityTier, IntentCategory, WorkflowContext } from "@fracta-flow/evidence-layer/core";
 
 export const CATEGORY_LABELS: Record<StrategyCategory, string> = {
   environmental: "Environmental",
@@ -62,4 +63,44 @@ export const ESCALATION_PHASE_LABELS: Record<EscalationPhase, string> = {
   peak: "Peak",
   "de-escalation": "De-escalation",
   recovery: "Recovery",
+};
+
+export const EVIDENCE_AUTHORITY_TIER_LABELS: Record<EvidenceAuthorityTier, string> = {
+  current_participant_plan: "Current participant plan",
+  interim_authorised: "Interim authorised instruction",
+  org_procedure_current: "Current organisational procedure",
+  assessment_evidence: "Assessment evidence",
+  historical_superseded: "Historical / superseded",
+};
+
+export const WORKFLOW_CONTEXT_LABELS: Record<WorkflowContext, string> = {
+  daily_support: "Daily support",
+  incident: "Incident",
+  bsa_fba: "BSA / FBA",
+  transport: "Transport",
+  intake_review: "Intake review",
+  consent_review: "Consent review",
+};
+
+export const WORKFLOW_CONTEXTS: WorkflowContext[] = [
+  "daily_support",
+  "incident",
+  "bsa_fba",
+  "transport",
+  "intake_review",
+  "consent_review",
+];
+
+export const INTENT_CATEGORY_LABELS: Record<IntentCategory, string> = {
+  proactive_strategy: "Proactive strategy",
+  reactive_strategy: "Reactive strategy",
+  incident_response: "Incident response",
+  transport_safety: "Transport safety",
+  restrictive_practice: "Restrictive practice",
+  communication: "Communication",
+  risk: "Risk",
+  consent: "Consent",
+  assessment_evidence: "Assessment evidence",
+  staff_instruction: "Staff instruction",
+  medication: "Medication",
 };

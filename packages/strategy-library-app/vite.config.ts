@@ -29,6 +29,25 @@ export default defineConfig({
         find: "@fracta-flow/strategy-library/core",
         replacement: path.resolve(dirname, "../strategy-library/src/core.ts"),
       },
+      {
+        find: "@fracta-flow/evidence-layer/core",
+        replacement: path.resolve(dirname, "../evidence-layer/src/core.ts"),
+      },
+      // evidence-layer's own source imports the BARE "@fracta-flow/retrieval-core"
+      // specifier internally (see evidence-layer/src/ranking.ts etc. — package
+      // source always uses the bare specifier, per this repo's convention;
+      // "/core" is purely an app-side aliasing target, never referenced inside
+      // another package's own source). Aliasing evidence-layer/core to source
+      // above doesn't change what THAT source imports, so the bare specifier
+      // needs its own alias here too, or retrieval-core's bundled dist/index.js
+      // (which eagerly requires documents.js — mammoth/pdf-parse/node:fs, none
+      // of which resolve in a browser bundle) gets pulled in transitively.
+      // retrieval-core also publishes this as its own "/core" subpath export
+      // for any future consumer that wants to ask for the subset explicitly.
+      {
+        find: "@fracta-flow/retrieval-core",
+        replacement: path.resolve(dirname, "../retrieval-core/src/core.ts"),
+      },
     ],
   },
   plugins: [
