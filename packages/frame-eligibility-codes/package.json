@@ -1,0 +1,24 @@
+{
+  "name": "@fracta-flow/frame-eligibility-codes",
+  "version": "0.1.0",
+  "description": "STUB: versioned opaque-code contract for the Frame -> FIELD eligibility handoff. Frame computes a de-identified eligibility bucket (e.g. \"1AXy\") locally and passes only the code to FIELD; this package decodes it into evidence-layer-shaped filtering inputs without ever accepting participant identity as input.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "npm run typecheck && vitest run",
+    "test:watch": "vitest"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fracta-flow/evidence-layer": "*",
+    "@fracta-flow/participant-profile": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}
