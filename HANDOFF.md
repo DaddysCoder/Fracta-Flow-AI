@@ -1,9 +1,37 @@
-# Handoff: FIELD evidence layer, Milestone 1 complete
+# Handoff: FIELD evidence layer — Milestone 1 + all four "next part" options shipped
 
 Written for whoever (human or a fresh Claude session) picks this up next —
 this file is the persistent record; don't rely on chat history surviving.
 
-## What shipped (commit `35a63a8`, merged via PR into this branch)
+## Decisions Pol needs to make before more work continues
+
+These are the two open items. Nothing is broken or blocking — both were
+called out by the agents that built them as "worth a human sanity-check,"
+not merge blockers, so they shipped as-is. Ask Pol which to prioritise (or
+whether to leave them as-is a while longer) before touching either.
+
+1. **`evidenceAuthorityTier` values on fracta-flow-field's 8 seeded
+   strategies are a placeholder, not real classification.** They were set
+   via a mechanical mapping (Strong evidence → tier 1, Emerging → tier 3,
+   Practice-based → tier 5) during the schema-alignment migration, purely so
+   the field exists and is populated. See
+   `fracta-flow-field/src/lib/strategy-library/strategies.ts`. Needs a real
+   pass — either manual clinical review, or wiring these records through
+   `evidence-layer`'s actual tier logic once fracta-flow-field has a real
+   evidence source.
+2. **The AI-drafting service's "no invented claims" guard is a heuristic,
+   not a guarantee.** `packages/ai-drafting-service/src/guard.ts` does a
+   structural citation check (cited evidence ids must exist in what the
+   model was given) plus a lexical-overlap heuristic — it cannot catch a
+   claim built entirely from words already in the evidence vocabulary (e.g.
+   a flipped negation: "never" → "always"), or a fabricated lowercase
+   clinical term. A real guarantee needs an entailment/NLI check (e.g. a
+   second, cheap model call to verify each output claim against the input
+   evidence). Decide whether that's needed before this ships to real
+   practitioners, or whether the heuristic + human review is acceptable for
+   now.
+
+## What shipped — Milestone 1 (commit `35a63a8`)
 
 Two new workspace packages, built to let FIELD (the governed PBS/allied-health
 workflow product) reuse `rag-work`'s proven, deterministic retrieval logic as
@@ -48,7 +76,15 @@ All `comparison.*Delta` fields should be `0`. A freeze manifest
 guards `ranking.ts`/`text-search.ts`/`retrieval.ts`/the frozen corpus against
 silent future changes — run `npm run verify:retrieval-freeze`.
 
-Public surface: see `src/index.ts` — re-exports everything above.
+A browser-safe subset lives in `src/browser.ts` (just `rankCandidates`/
+`baseTokens`, no Node dependencies) — added when UI wiring hit a real bug:
+importing the full `src/index.ts` from a browser pulled in Node-only document
+ingestion deps (`mammoth`/`pdf-parse`, native `.node` binaries) that don't
+load under `vite dev`. Use `browser.ts` from any browser-side code; the
+frozen `ranking.ts`/`text-search.ts` themselves are untouched.
+
+Public surface: see `src/index.ts` (Node/full) and `src/browser.ts`
+(browser-safe subset).
 
 ### `packages/evidence-layer`
 
@@ -91,57 +127,151 @@ sensitivity, participant scoping) plus a starter benchmark
 `npm test`) with three gates: tier-correctness, supersession-correctness,
 workflow-sensitivity. All passing.
 
+## What shipped since — all four "next part" options are now done
+
+### 1. UI wiring (`packages/strategy-library-app`)
+
+Evidence-layer results are now surfaced live in the app:
+- `src/lib/evidenceSeed.ts` — mock `StructuredKnowledgeRecord`/
+  `EvidenceChunkRecord` candidates (org-wide procedures across tiers, two
+  participant-scoped current plans with fixed demo ids `seed-participant-1`/
+  `-2` — these won't match real locally-created participants, which use
+  random UUIDs, so in normal use they never surface; this is intentional
+  and still proves the scoping contract, but there's no live demo of a
+  "current participant plan" tier hit without hand-seeding a matching id).
+  No evidence-shaped backend route exists yet — this stands in for one the
+  same way `SEED_TEMPLATES` does for strategies.
+- `src/lib/evidenceQuery.ts` — `queryEvidence(query, workflowContext,
+  activeParticipantId)`. Enforces participant scoping *before* candidates
+  reach `rankEvidence`: only org-wide evidence plus the active participant's
+  own records ever enter the candidate list.
+- `src/components/EvidenceSearch.tsx` — search view (query + workflow-context
+  select) showing authority tier, matched intent categories, workflow
+  multiplier, and base/final score explicitly and un-collapsed (this is
+  safety-critical explainability per the evidence-layer design). Wired into
+  `App.tsx`'s nav.
+- The app previously had no tests; vitest + `@testing-library/react` were
+  added, with 12 new tests.
+
+### 2. AI-drafting service (`packages/ai-drafting-service`)
+
+Mirrors `strategy-library-server`'s existing pattern exactly:
+- `evidenceAllowlist.ts` — the input-contract enforcement point.
+  `AllowedEvidenceItem` has no `participantRef`/`sourceDocumentId`/name
+  fields at all (not stripped — never present in the type), and
+  independently re-validates `approvalStatus === "approved"` and
+  `current === true` before trusting anything, regardless of whether the
+  caller already filtered via `rankEvidence()`.
+- `promptBuilder.ts` — explicit never-invent framing, forced output format.
+- `anthropicClient.ts` — same 4-way outcome classification as
+  strategy-library-server (success / refusal / network_error / api_error).
+- `guard.ts` — best-effort no-invented-claims check. **See the open decision
+  at the top of this file — this is a heuristic, not a guarantee.**
+- 39 tests (prompt builder, client wrapper with mocked network calls,
+  evidence allowlist, guard, route across all 4 outcome classes).
+- Model default follows strategy-library-server's existing choice
+  (`claude-sonnet-4-5` via `ANTHROPIC_MODEL` env var) to keep the two
+  services consistent — revisit together if moving either to a newer model.
+- Not scanned: the practitioner's free-text `instruction` field isn't
+  checked for PII — the structural no-identity guarantee is on the evidence
+  path only. Worth a decision if practitioners might type identifying
+  detail into that field.
+
+### 3. Frame eligibility-code integration (`packages/frame-eligibility-codes`)
+
+Explicitly a **stub** — there is no live Frame system to integrate with yet:
+- Versioned opaque-code format, e.g. `"1AXs"` → `{diagnosisCategory:
+  "autism", ageBand: "13-17", supportComplexity: "standard"}`. The version
+  is the code's own first character; `decodeEligibilityCode` always
+  resolves it against `CODE_SETS` before letter lookup, so an old code can
+  never be silently reinterpreted under a future table.
+- Pure `decodeEligibilityCode`/`encodeEligibility` (`src/codec.ts`) — no
+  network, no throwing on malformed input (returns `null`). Identity can't
+  flow through by construction: closed enumerated types plus a runtime
+  `assertNoIdentityLeakage` scan for spread-assembled values.
+- Thin adapter (`src/adapter.ts`) — `toEligibilityFilters()` maps onto
+  `participant-profile`'s `EligibilityFilters`; `restrictToOrgWideEvidence`
+  + `buildEligibilityAwareQuery` show how to feed `evidence-layer`'s
+  `rankEvidence` (narrowed to org-wide `participantRef === null` records,
+  since a Frame code carries no participant linkage).
+- `// STUB:` markers + a README section flag what's illustrative (the
+  diagnosis/age-band/complexity taxonomy, letter mappings) vs. structurally
+  real (the versioning mechanism, the identity boundary). **The real
+  code↔category taxonomy is still an open decision** for whoever owns the
+  actual Frame↔FIELD handoff — not listed as a top decision above because
+  no real Frame system exists yet to make it urgent.
+- 28 tests: round-trip encode/decode, malformed-input handling,
+  version-mismatch, `@ts-expect-error` type-level identity-rejection checks,
+  adapter wiring including a real `classifyIntent` integration check.
+
+### 4. `fracta-flow-field` schema alignment (separate repo)
+
+Decided: migrate fracta-flow-field onto Fracta-Flow-AI's richer schema
+(rather than stay a separate, thinner model). Done as schema alignment only
+— no evidence-layer/retrieval-core integration yet, so the two products can
+share that code later without another rewrite.
+
+fracta-flow-field turned out to have no D1/backend persistence for
+participant/strategy data — the Worker only handles auth/entitlement/Stripe
+via KV. Participant profiles and personalisation drafts live in browser
+`localStorage`; strategies are a static array. No server-side migration was
+needed as a result.
+
+- `ParticipantProfile` — added `eligibilityFilters` (age range, cultural
+  safety flags, excluded support types, guardian consent) matching
+  Fracta-Flow-AI's shape field-for-field, plus `dateOfBirth`,
+  `culturalSafetyNotes`, `schemaVersion`, `createdAt`/`updatedAt`.
+- `Strategy` → `StrategyTemplate` — renamed to match Fracta-Flow-AI;
+  `variants` → `personalisationRecords`; added governance fields (`version`,
+  `approvalStatus`, `effectiveDate`, `current`, `supersededBy`,
+  **`evidenceAuthorityTier`** — see open decision #1 above), plus
+  `ageRange`, `culturalSafetyNotes`, and `resolveCurrentTemplate`
+  (cycle-guarded chain-walk).
+- Deliberate deviations: `PersonalisationRecord.participantRef` is optional
+  (these are pre-authored generic templates, not per-participant records);
+  the legacy `superseded: SupersededInfo` display field was kept as
+  `supersededInfo` (a "figure updated" UI note) rather than folded into the
+  governance chain.
+- Migration path: `migrations.ts` upgrades old (no-`schemaVersion`) records.
+  `storage.ts` reads `field.participant-profile.v2` first, falls back to
+  legacy `v1`, migrates and re-persists under `v2` — old key untouched
+  (rollback-safe). Corrupt data falls back to demo data rather than
+  crashing.
+
 ## Deliberately NOT touched
 
-- **`rag-work`** — zero commits, zero pushes. It's a pure copy source; its
-  benchmark and credibility as a standalone project stay intact.
-- **`fracta-flow-field`** — the separate, thinner-schema consumer app. No
-  schema alignment decision has been made yet; touching it was explicitly
-  out of scope for this pass.
-- No UI wiring (nothing in `strategy-library-app` reads from `evidence-layer`
-  yet), no AI-drafting service, no Frame integration.
+- **`rag-work`** — zero commits, zero pushes, throughout all of the above.
+  It's a pure copy source; its benchmark and credibility as a standalone
+  project stay intact.
+- No real Frame system exists — item 3 above is a stub only.
+- No real evidence source feeds fracta-flow-field yet — its
+  `evidenceAuthorityTier` values are placeholders (open decision #1).
 
 ## How to verify current state
 
+**Fracta-Flow-AI** (branch `claude/participant-profile-module-05hh98`):
 ```sh
 cd Fracta-Flow-AI
 npm install
-npm run build --workspaces --if-present   # all 6 packages compile clean
-npm test --workspaces --if-present        # all suites pass (95 tests total)
+cd packages/retrieval-core && npm run build && cd ../..  # build this first — npm workspaces
+                                                            # don't topologically order, and
+                                                            # evidence-layer/ai-drafting-service/
+                                                            # strategy-library-app depend on it
+npm run build --workspaces --if-present   # all 8 packages compile clean
+npm test --workspaces --if-present        # all suites pass (174 tests total)
 ```
 
-## Next part — pick one (not yet decided)
+**fracta-flow-field** (branch `claude/fracta-flow-field-launch-n6s7jb`):
+```sh
+cd fracta-flow-field
+npm install
+npm run build
+npm run worker:typecheck
+npm test   # 14 tests total
+```
 
-These were discussed but deliberately deferred to keep Milestone 1 bounded:
+## Next part — not yet decided
 
-1. **UI wiring** — surface `evidence-layer` results in
-   `packages/strategy-library-app` (currently reads only static
-   `SEED_TEMPLATES`; would need a real evidence query path).
-2. **AI-drafting service** — a new service mirroring
-   `packages/strategy-library-server`'s existing pattern exactly (server-side
-   lookup → field allowlist → tightly scoped prompt with explicit "preserve
-   this, never invent that" framing → forced output format → 4-way error
-   classification), scoped to draft/explain *after* `rankEvidence` has
-   already selected the evidence — never given raw participant identity or
-   unapproved documents. This is the natural home for the "paid feature, LLM
-   sees no participant data, just combines/adds to what secure FIELD already
-   selected" flow discussed with Pol.
-3. ~~**Frame eligibility-code integration**~~ — **STUB shipped**, see
-   `packages/frame-eligibility-codes` (branch `claude/frame-eligibility-stub`).
-   A versioned opaque-code format (`decodeEligibilityCode`/
-   `encodeEligibility`, e.g. `"1AXs"` → `{diagnosisCategory: "autism",
-   ageBand: "13-17", supportComplexity: "standard"}`) plus a thin adapter
-   (`toEligibilityFilters` → `participant-profile`'s `EligibilityFilters`;
-   `restrictToOrgWideEvidence` + `buildEligibilityAwareQuery` → feeds
-   `evidence-layer`'s `rankEvidence`). Still not a real integration — there
-   is no live Frame system, and the diagnosis/age-band/complexity taxonomy
-   is explicitly illustrative (`// STUB:` markers throughout, see that
-   package's README). The real code↔category taxonomy is still an open
-   decision for whoever owns the actual Frame↔FIELD handoff.
-4. **`fracta-flow-field` schema alignment** — decide whether it migrates onto
-   `Fracta-Flow-AI`'s richer schema or stays a separate, thinner product, then
-   act on that decision. Currently genuinely undecided — see the two repos'
-   diverged `ParticipantProfile`/`Strategy` shapes.
-
-Whoever picks this up: ask Pol which of these (or something else) is next
-before starting — don't assume.
+Beyond the two decisions at the top of this file, no further scope has been
+agreed. Whoever picks this up: ask Pol what's next before starting — don't
+assume.
