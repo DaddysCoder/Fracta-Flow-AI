@@ -126,11 +126,18 @@ These were discussed but deliberately deferred to keep Milestone 1 bounded:
    unapproved documents. This is the natural home for the "paid feature, LLM
    sees no participant data, just combines/adds to what secure FIELD already
    selected" flow discussed with Pol.
-3. **Frame eligibility-code integration** — a stub for the opaque-code
-   handoff (Frame computes a de-identified eligibility bucket like `AXy` →
-   `{diagnosis category, age band, ...}` locally and passes only the code to
-   FIELD; FIELD never holds identity). Needs a shared, versioned code↔category
-   lookup table design before this can be built for real.
+3. ~~**Frame eligibility-code integration**~~ — **STUB shipped**, see
+   `packages/frame-eligibility-codes` (branch `claude/frame-eligibility-stub`).
+   A versioned opaque-code format (`decodeEligibilityCode`/
+   `encodeEligibility`, e.g. `"1AXs"` → `{diagnosisCategory: "autism",
+   ageBand: "13-17", supportComplexity: "standard"}`) plus a thin adapter
+   (`toEligibilityFilters` → `participant-profile`'s `EligibilityFilters`;
+   `restrictToOrgWideEvidence` + `buildEligibilityAwareQuery` → feeds
+   `evidence-layer`'s `rankEvidence`). Still not a real integration — there
+   is no live Frame system, and the diagnosis/age-band/complexity taxonomy
+   is explicitly illustrative (`// STUB:` markers throughout, see that
+   package's README). The real code↔category taxonomy is still an open
+   decision for whoever owns the actual Frame↔FIELD handoff.
 4. **`fracta-flow-field` schema alignment** — decide whether it migrates onto
    `Fracta-Flow-AI`'s richer schema or stays a separate, thinner product, then
    act on that decision. Currently genuinely undecided — see the two repos'
