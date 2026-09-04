@@ -1,0 +1,24 @@
+{
+  "name": "@fracta-flow/retrieval-core",
+  "version": "0.1.0",
+  "description": "Deterministic, local, encrypted document retrieval — forked from rag-work's benchmarked retrieval pipeline (tokenize/expand, BM25-style rank, extractive snippet selection, AES-256-GCM + blind-index crypto primitives). Ported for reuse outside rag-work's single-workspace Next.js/Postgres deployment; the ranking/text-search logic is unmodified, the crypto layer is parameterized (no ambient key state) so a host app owns its own key custody.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "bench": "node benchmark/v2/run-benchmark.mjs --output .bench-output",
+    "verify:retrieval-freeze": "node scripts/verify-retrieval-freeze.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "mammoth": "1.12.1",
+    "pdf-parse": "2.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

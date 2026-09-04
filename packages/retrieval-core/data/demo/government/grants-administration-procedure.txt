@@ -1,0 +1,18 @@
+Grants Administration Procedure
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This procedure explains how FDDS designs, assesses and administers grant programs, in accordance with the Commonwealth Grants Rules and Guidelines and the Public Governance, Performance and Accountability Act (PGPA Act).
+
+2. Designing a grant opportunity
+Before opening a grant opportunity, the responsible business area must publish grant guidelines describing eligibility, assessment criteria and the application process, and must confirm funding is available. Grant guidelines and any material change to them must be approved by a delegate with grants authority.
+
+3. Assessment and approval
+Applications are assessed against the published criteria by a panel, and the assessment is documented in a grant opportunity assessment report or equivalent. Who needs to sign off on a grant depends on its value and risk: routine, lower-value grants may be approved by a delegate under the department's Delegations and Approval Authority Guide, while higher-value or higher-risk grants require consideration by the grants committee and, in some cases, ministerial approval before the delegate makes a final decision.
+
+4. Grant agreements and management
+Successful applicants must enter into a grant agreement setting out funding conditions, reporting obligations and performance measures. The responsible business area monitors compliance with the agreement, including milestone reporting, and manages any variation or non-compliance in line with the agreement's terms.
+
+5. Probity, records and reporting
+Grants staff must declare conflicts of interest before participating in assessment, and grant records must be retained in accordance with the Records Management Policy. Grants above the relevant threshold are reported publicly on GrantConnect in line with Commonwealth Grants Rules and Guidelines. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth grants program.

@@ -1,0 +1,22 @@
+{
+  "name": "@fracta-flow/evidence-layer",
+  "version": "0.1.0",
+  "description": "FIELD's governed PBS evidence layer: structured/chunked evidence records with approval, versioning and an authority hierarchy; deterministic intent classification and workflow-aware, tier-gated ranking on top of @fracta-flow/retrieval-core.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@fracta-flow/retrieval-core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

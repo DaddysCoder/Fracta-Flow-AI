@@ -1,0 +1,13 @@
+{
+  "src/lib/retrieval.ts": "340963302670a83271bde386f8a95d7b9a29290c603c9148f066a40e2792daf8",
+  "src/lib/ranking.ts": "509f001ec2cb345893b842979abb057c474b938dfdfa026e4e7a51c7a19624cf",
+  "src/lib/text-search.ts": "41ace36d330d9029acc0cd030c009aff3e4b8ae7c39aa22100c23f9949112f30",
+  "data/demo/government/delegations-and-approval-authority-guide.txt": "95fb06bc4bf05ad937bae04e45e13d087b0de282ab9d3fbdb316b9913d611a1a",
+  "data/demo/government/grants-administration-procedure.txt": "962b55283b98ac68b732568287dbe9e0e08c4c83d53a49848076e82dc1ba3848",
+  "data/demo/government/incident-and-data-breach-response-procedure.txt": "deb2fd729c9cbde5da2cd04fd73c2d4f313035bccd4ec30aa20e5c44465b8869",
+  "data/demo/government/information-security-policy.txt": "cede6af3068b24fb33ecbb2f4efce6ea83155ac3c24674419bc01efdba4fdbd0",
+  "data/demo/government/privacy-and-personal-information-procedure.txt": "c20287e20a633ec0d2acf33ff5a3f74706a140285950c1f0556a90e56de705a2",
+  "data/demo/government/procurement-and-contract-management-procedure.txt": "8e10021fbb22e1f362cecc0dd3df0e819878c64d36e053d08f66ecadac0d5d7e",
+  "data/demo/government/records-management-policy.txt": "765944ec5edf14e2bd41e077619701dbb88340e63bce67bc0b1f8c7beb7a5217",
+  "data/demo/government/staff-induction-and-training-guide.txt": "e10704858209060e7f4410a8194029eb7e0c1824b89d161d9f0b864ebb53bf37"
+}

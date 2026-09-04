@@ -1,0 +1,18 @@
+Delegations and Approval Authority Guide
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This guide explains who can approve what at FDDS, and how delegated authority operates under the Public Governance, Performance and Accountability Act (PGPA Act) and the department's internal instrument of delegation.
+
+2. What a delegation is
+A delegation is a formal authority given by the Secretary, as accountable authority, to an official to exercise a power on the department's behalf — for example, approving a purchase, entering into a contract, approving a grant, or approving expenditure. Delegations are set out in the department's instrument of delegation and are tied to the official's position, not the individual, unless otherwise specified.
+
+3. Who can approve a purchase
+The delegate who approves a purchase or contract must hold a current financial delegation covering both the value and the category of the spend. Delegates must confirm value for money, availability of funds, and compliance with the Commonwealth Procurement Rules (CPRs) before approving. Purchases above an individual delegate's threshold must be escalated to a delegate with sufficient authority, and no official may approve their own expenditure or a benefit to themselves or a close associate.
+
+4. Who needs to sign off on a grant
+Grant agreements require approval from an official with grants delegation, informed by an assessment against the published grant guidelines and, for higher-value or higher-risk grants, advice from the department's grants committee. Refer to the Grants Administration Procedure for the full approval pathway.
+
+5. Record of delegation exercised
+Every exercise of a delegation must be recorded, including the decision, the delegate, the date and the basis for the decision, in accordance with the Records Management Policy. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth instrument of delegation.

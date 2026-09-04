@@ -1,0 +1,45 @@
+{
+  "sealedCommit": "c1e445b352b525117bbf4f71c93aff8ba6b7596e",
+  "sealedZipSha256": "f0bd2d596da79a4c4dd6c347deee55e43cf0c2899c404c1bdf9527d0f97eb803",
+  "independentAuditCommit": "03b895a5788dfbb6d801e56350d322f1d2323e89",
+  "questionsSha256": "b242dd9eabc12123e21e5d2bf4d96f8bffe1f7765c884ac873c2cd559e4a513c",
+  "corpusSha256": {
+    "delegations-and-approval-authority-guide.txt": "95fb06bc4bf05ad937bae04e45e13d087b0de282ab9d3fbdb316b9913d611a1a",
+    "grants-administration-procedure.txt": "962b55283b98ac68b732568287dbe9e0e08c4c83d53a49848076e82dc1ba3848",
+    "incident-and-data-breach-response-procedure.txt": "deb2fd729c9cbde5da2cd04fd73c2d4f313035bccd4ec30aa20e5c44465b8869",
+    "information-security-policy.txt": "cede6af3068b24fb33ecbb2f4efce6ea83155ac3c24674419bc01efdba4fdbd0",
+    "privacy-and-personal-information-procedure.txt": "c20287e20a633ec0d2acf33ff5a3f74706a140285950c1f0556a90e56de705a2",
+    "procurement-and-contract-management-procedure.txt": "8e10021fbb22e1f362cecc0dd3df0e819878c64d36e053d08f66ecadac0d5d7e",
+    "records-management-policy.txt": "765944ec5edf14e2bd41e077619701dbb88340e63bce67bc0b1f8c7beb7a5217",
+    "staff-induction-and-training-guide.txt": "e10704858209060e7f4410a8194029eb7e0c1824b89d161d9f0b864ebb53bf37"
+  },
+  "cleanCorroborationIds": [
+    "Q066",
+    "Q068",
+    "Q069",
+    "Q071",
+    "Q074"
+  ],
+  "disputedLabels": {
+    "Q005": "exclude: approval actor is not committee advice",
+    "Q052": "exclude: positive storage question has negative-only label",
+    "Q063": "exclude: procedural cross-reference lacks labelled must modality",
+    "Q067": "exclude relation: different procurement and grant evaluation processes",
+    "Q070": "exclude relation: guideline approval and agreement approval differ",
+    "Q072": "exclude relation: different procurement and grant record applications",
+    "Q073": "exclude relation: umbrella cross-reference is not a specific storage rule",
+    "Q075": "exclude relation: induction coverage is not minimum staff requirements"
+  },
+  "unsupportedQuestions": [
+    "What is the CEO's home address?",
+    "How much annual leave do casual staff accrue under the enterprise agreement?",
+    "What is the wifi password for the Canberra office?",
+    "Which cloud provider hosts the department's payroll system?",
+    "What was the department's cyber insurance premium last year?"
+  ],
+  "controlSourceCorrections": {
+    "Q081": {
+      "docId": "delegations-and-approval-authority-guide.txt"
+    }
+  }
+}

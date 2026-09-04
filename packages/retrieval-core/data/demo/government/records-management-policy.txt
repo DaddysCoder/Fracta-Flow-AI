@@ -1,0 +1,18 @@
+Records Management Policy
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This policy sets out how official records must be created, managed, stored and disposed of by FDDS staff, in line with Commonwealth recordkeeping obligations and the department's obligations as an accountable authority under the PGPA Act.
+
+2. What is an official record
+An official record is any information created or received by FDDS in the course of business that provides evidence of a decision, action or transaction, including emails, ministerial correspondence, briefs, contracts and meeting minutes. All official records must be captured in the department's approved recordkeeping system and must not be kept only in personal email or on local drives.
+
+3. Retention periods
+Retention periods for official records are set by records authorities and vary by record type. As a general rule, records relating to policy decisions, contracts and grant agreements must be retained for a minimum of seven years, and records with long-term historical or legal significance may be retained permanently. Staff must not delete or dispose of a record unless a documented disposal authority applies, and any disposal must be approved by the departmental records manager.
+
+4. Access, security and classification
+Records must be classified and handled in accordance with the Information Security Policy and the Protective Security Policy Framework (PSPF). Access to sensitive records, including personal information and Cabinet material, must be limited to staff with a demonstrated business need.
+
+5. Freedom of information
+Records may be subject to a Freedom of Information (FOI) request under the Freedom of Information Act. Staff must ensure records are complete, accurate and retrievable to support timely FOI processing, and must refer any FOI request to the department's FOI team rather than responding directly. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth recordkeeping regime.

@@ -1,0 +1,18 @@
+Information Security Policy
+Fictional Department of Digital Services (FDDS)
+Synthetic demonstration document — not a real government record.
+
+1. Purpose
+This policy sets out the minimum information security requirements for all staff, contractors and delegates of the Fictional Department of Digital Services (FDDS). It supports compliance with the Protective Security Policy Framework (PSPF) and the Australian Government Information Security Manual (ISM), and applies to all official information created, stored or transmitted by the department, regardless of format or classification.
+
+2. Classification of information
+All official information must be classified in line with the Australian Government's information classification system: OFFICIAL, OFFICIAL: Sensitive, PROTECTED, SECRET or TOP SECRET. Staff must apply the lowest classification that appropriately protects the information and must not store PROTECTED or higher material on unapproved systems. Where classification is uncertain, staff should consult their line manager or the department's Chief Information Security Officer before release.
+
+3. Access and handling requirements
+Access to systems containing PROTECTED information requires a baseline security clearance and a demonstrated business need. Multi-factor authentication is mandatory for all remote access to departmental systems. Removable media must be encrypted and approved before use, and official devices must not be left unattended in public places. Any suspected compromise of credentials must be reported to the Security Operations team within one business day.
+
+4. Incident reporting
+Staff who become aware of an actual or suspected information security incident, including a possible data breach, must report it immediately through the department's incident reporting channel. Refer to the Incident and Data Breach Response Procedure for the full escalation pathway, notification timeframes and obligations under the Notifiable Data Breaches scheme administered by the Office of the Australian Information Commissioner (OAIC).
+
+5. Review
+This policy is reviewed annually by the FDDS Governance Committee and whenever there is a material change to the PSPF or ISM. This is a synthetic example created for demonstration purposes only and does not represent an actual Commonwealth policy.
